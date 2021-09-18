@@ -15,7 +15,7 @@ public class LoginAdminPanel {
     @Before
     public void start() {
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(); //вызов браузера
         System.out.println("Test is started");
 
     }
@@ -24,6 +24,7 @@ public class LoginAdminPanel {
     public void setup() {
         driver.get("http://localhost/litecart/admin/login.php");
         WebDriverWait wait = new WebDriverWait(driver, 10);
+        //Loging
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("login")).click();
