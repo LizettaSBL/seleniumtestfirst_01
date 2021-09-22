@@ -31,48 +31,14 @@ public class Stickers {
     public void setup() {
         driver.get("http://localhost/litecart/en/");
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        //Post Popular
-        System.out.println("Block check Post Popular");
-        for (int i = 1; i <= (driver.findElements(By.xpath("//*[@id=\"box-most-popular\"]/div/ul/li")).size()); i++) {
 
-            if (!(driver.findElements(cssSelector("#box-most-popular > div > ul > li:nth-child(" + i + ") > a.link > div.image-wrapper > div[title='New']")).isEmpty())) {
-                System.out.println(i + ". the product has a sticker");
-            } else {
-                if (!(driver.findElements(cssSelector("#box-most-popular > div > ul > li:nth-child(" + i + ") > a.link > div.image-wrapper > div[title='On Sale']")).isEmpty())) {
-                    System.out.println(i + ". the product has a sticker");
-                } else {
-                    System.out.println(i + ". product has no sticker");
-                }
-            }
-        }
+        for (int i = 1; i <= (driver.findElements(By.xpath("//li[starts-with(@class,'product')]")).size()); i++) {
 
-        //Campaigns
-        System.out.println("Block check Campaigns");
-        for (int i = 1; i <= (driver.findElements(By.xpath("//*[@id=\"box-campaigns\"]/div/ul/li")).size()); i++) {
-
-            if (!(driver.findElements(cssSelector("#box-campaigns > div > ul > li:nth-child(" + i + ") > a.link > div.image-wrapper > div[title='New']")).isEmpty())) {
-                System.out.println(i + ". the product has a sticker");
-            } else {
-                if (!(driver.findElements(cssSelector("#box-campaigns > div > ul > li:nth-child(" + i + ") > a.link > div.image-wrapper > div[title='On Sale']")).isEmpty())) {
-                    System.out.println(i + ". the product has a sticker");
-                } else {
-                    System.out.println(i + ". product has no sticker");
-                }
-            }
-        }
-
-        //Latest Products
-        System.out.println("Block check Latest Products");
-        for (int i = 1; i <= (driver.findElements(By.xpath("//*[@id=\"box-latest-products\"]/div/ul/li")).size()); i++) {
-
-            if (!(driver.findElements(cssSelector("#box-latest-products > div > ul > li:nth-child(" + i + ") > a.link > div.image-wrapper > div[title='New']")).isEmpty())) {
-                System.out.println(i + ". the product has a sticker");
-            } else {
-                if (!(driver.findElements(cssSelector("#box-latest-products > div > ul > li:nth-child(" + i + ") > a.link > div.image-wrapper > div[title='On Sale']")).isEmpty())) {
-                    System.out.println(i + ". the product has a sticker");
-                } else {
-                    System.out.println(i + ". product has no sticker");
-                }
+            if ((driver.findElements(cssSelector("//li[starts-with(@class,'product')]["+i+"]//div[starts-with(@class,'sticker')]")).size()) == 1)
+            {
+                System.out.println(i + ". the product has one sticker");
+            } else{
+                System.out.println(i + ". product has no sticker or more than one");
             }
         }
 

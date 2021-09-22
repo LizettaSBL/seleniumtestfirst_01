@@ -44,9 +44,21 @@ public class Menu {
         for (int i = 0; i < numberOfMenuElements; i++) {
             elementMenuHaupt = driver.findElements(By.xpath("//*[@id=\"app-\"]/a"));
             elementMenuHaupt.get(i).click();
+            if (driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).isDisplayed()==true) {
+                System.out.println("pass");
+            }
+            else {
+                System.out.println("false");
+            }
 
             for (int j = 0; j < (driver.findElements(By.xpath("//*[@class=\"selected\"]//a")).size()); j++) {
                 driver.findElements(By.xpath("//*[@class=\"selected\"]//a")).get(j).click();
+                if (driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).isDisplayed()==true) {
+                    System.out.println("pass");
+                }
+                else {
+                    System.out.println("false");
+                }
             }
 
         }
