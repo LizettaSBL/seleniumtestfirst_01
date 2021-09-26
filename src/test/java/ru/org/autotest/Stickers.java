@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -31,17 +32,13 @@ public class Stickers {
     public void setup() {
         driver.get("http://localhost/litecart/en/");
         WebDriverWait wait = new WebDriverWait(driver, 10);
-
-        for (int i = 1; i <= (driver.findElements(By.xpath("//li[starts-with(@class,'product')]")).size()); i++) {
-
-            if ((driver.findElements(cssSelector("//li[starts-with(@class,'product')]["+i+"]//div[starts-with(@class,'sticker')]")).size()) == 1)
-            {
-                System.out.println(i + ". the product has one sticker");
-            } else{
-                System.out.println(i + ". product has no sticker or more than one");
-            }
+        int product = driver.findElements(By.xpath("//li[starts-with(@class,'product')]")).size();
+        int sticker = driver.findElements(By.xpath("*//div[starts-with(@class,'sticker')]")).size();
+        if (product == sticker) {
+            System.out.println("all products have one sticker");
+        } else {
+            System.out.println("condition is not met");
         }
-
     }
 
 
