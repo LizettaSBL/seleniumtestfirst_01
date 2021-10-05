@@ -1,6 +1,7 @@
 package ru.org.autotest;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.openqa.selenium.By.cssSelector;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -32,13 +34,11 @@ public class Stickers {
     public void setup() {
         driver.get("http://localhost/litecart/en/");
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        int product = driver.findElements(By.xpath("//li[starts-with(@class,'product')]")).size();
-        int sticker = driver.findElements(By.xpath("*//div[starts-with(@class,'sticker')]")).size();
-        if (product == sticker) {
-            System.out.println("all products have one sticker");
-        } else {
-            System.out.println("condition is not met");
+        List<WebElement> products = driver.findElements(By.xpath("//li[starts-with(@class,'product')]"));
+        for(WebElement e : products){
+            Assert.assertEquals( e.findElements(By.className("sticker")).size(), 1);
         }
+
     }
 
 
