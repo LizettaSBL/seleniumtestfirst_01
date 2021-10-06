@@ -44,11 +44,11 @@ public class СorrectProductPage {
         String NameCampaign = CampaignsOne.findElement(By.xpath("//div[@class=\"name\"]")).getAttribute("textContent"); //name-Yellow Duck - Main Page
         String OldPriceMain = CampaignsOne.findElement(By.xpath("//s")).getAttribute("textContent"); //old price - Main Page
         String NewPriceMain = CampaignsOne.findElement(By.xpath("//strong[@class=\"campaign-price\"]")).getAttribute("textContent"); //new price - Main Page
-        double OldPriceMainDouble = Double.valueOf(OldPriceMain.substring(1));
-        double NewPriceMainDouble = Double.valueOf(NewPriceMain.substring(1));
 
         String VarOldPriceMainColor = CampaignsOne.findElement(By.xpath("//s")).getCssValue("color"); // color- #666 OR #777
         String VarNewPriceMainColor = CampaignsOne.findElement(By.xpath("//strong[@class=\"campaign-price\"]")).getCssValue("color"); //color- #c00
+        String VarOldMainFontSize = CampaignsOne.findElement(By.xpath("//s")).getCssValue("font-size");
+        String VarNewMainFontSize = CampaignsOne.findElement(By.xpath("//strong[@class=\"campaign-price\"]")).getCssValue("font-size");
 
         CampaignsOne.click(); //product page
 
@@ -58,11 +58,11 @@ public class СorrectProductPage {
         String NameProductPage = ProductPage.findElement(By.xpath("//h1")).getAttribute("textContent"); //name-Yellow Duck - Product Page
         String OldPriceProductPage = ProductPage.findElement(By.xpath("//s")).getAttribute("textContent"); //old price - Product Page
         String NewPriceProductPage = ProductPage.findElement(By.xpath("//strong[@class=\"campaign-price\"]")).getAttribute("textContent"); //new price - Product Page
-        double OldPriceProductPageDouble = Double.valueOf(OldPriceProductPage.substring(1));
-        double NewPriceProductPageDouble = Double.valueOf(NewPriceProductPage.substring(1));
 
         String VarOldPriceProductPageColor = ProductPage.findElement(By.xpath("//s")).getCssValue("color"); // color- #666 OR #777- Product Page
         String VarNewPriceProductPageColor = ProductPage.findElement(By.xpath("//strong[@class=\"campaign-price\"]")).getCssValue("color"); //color- #c00 - Product Page
+        String VarOldProductPageFontSize = ProductPage.findElement(By.xpath("//s")).getCssValue("font-size");
+        String VarNewProductPageFontSize = ProductPage.findElement(By.xpath("//strong[@class=\"campaign-price\"]")).getCssValue("font-size");
 
 
         // а-name
@@ -73,22 +73,14 @@ public class СorrectProductPage {
         // в-old-gray and strikethrough "s"
         checkColorGrey(VarOldPriceMainColor, driver);
         checkColorGrey(VarOldPriceProductPageColor, driver);
-
-
         // г-new oily- "strong" and red
-
         checkColorRed(VarNewPriceMainColor, driver);
         checkColorRed(VarNewPriceProductPageColor, driver);
-
-
         // д-new larger than normal
-        if (OldPriceMainDouble > NewPriceMainDouble) {
-            System.out.println("old price is higher than new on the main page");
-        }
+        checkFontSize(VarOldMainFontSize,VarNewMainFontSize);
+        checkFontSize(VarOldProductPageFontSize,VarNewProductPageFontSize);
 
-        if (OldPriceProductPageDouble > NewPriceProductPageDouble) {
-            System.out.println("old price is higher than new on product page");
-        }
+
     }
 
     public static boolean checkColorGrey(String colorOldRGB, WebDriver driver) {
@@ -127,6 +119,11 @@ public class СorrectProductPage {
         } else
             throw new RuntimeException("driver class not found");
 
+    }
+    private static boolean checkFontSize(String oldPriceFontSize, String newPriceFontSize) {
+        Double oldFontSize = Double.parseDouble(oldPriceFontSize.replace("px", ""));
+        Double newFontSize = Double.parseDouble(newPriceFontSize.replace("px", ""));
+        return newFontSize > oldFontSize;
     }
 
     @After
