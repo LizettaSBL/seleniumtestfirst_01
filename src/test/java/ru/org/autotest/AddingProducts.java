@@ -38,7 +38,7 @@ public class AddingProducts {
     }
 
     @Test
-    public void Task11Test() throws InterruptedException {
+    public void Task12Test() throws InterruptedException {
         driver.get("http://localhost/litecart/admin/login.php");
         WebDriverWait wait = new WebDriverWait(driver, 10);
         //Loging
