@@ -42,9 +42,9 @@ public class UserRegistration {
         driver.get("http://localhost/litecart/en/");
         driver.findElement(By.cssSelector("#box-account-login tr:nth-child(5) a")).click();
         WebElement createAccount = driver.findElement(By.cssSelector("#create-account"));
-//Entering a value captcha
-        String captchaVal = JOptionPane.showInputDialog("Please enter the captcha value:");
-        driver.findElement(By.xpath("//*[@id=\"create-account\"]/div//input[2]")).sendKeys(captchaVal);
+//Entering a value captcha- if captcha = true
+/*        String captchaVal = JOptionPane.showInputDialog("Please enter the captcha value:");
+        driver.findElement(By.xpath("//*[@id=\"create-account\"]/div//input[2]")).sendKeys(captchaVal);*/
 //Entering values
         setField(createAccount, "firstname", firstName);
         setField(createAccount, "lastname", lastName);
