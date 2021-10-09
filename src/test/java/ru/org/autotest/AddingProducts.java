@@ -27,6 +27,7 @@ public class AddingProducts {
     5) После сохранения товара нужно убедиться, что он появился в каталоге (в админке). Клиентскую часть магазина можно не проверять.
     */
     private static WebDriver driver;
+
     @Before
     public void start() {
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
@@ -40,7 +41,6 @@ public class AddingProducts {
     @Test
     public void Task12Test() throws InterruptedException {
         driver.get("http://localhost/litecart/admin/login.php");
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         //Loging
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
@@ -83,8 +83,8 @@ public class AddingProducts {
         setField(NewProTab, "short_description[en]", "new smartphone model");
         NewProTab.findElement(By.cssSelector(".trumbowyg-editor"))
                 .sendKeys(Keys.HOME + "Incredibly bright display in a robust design." + Keys.ENTER
-                        + "Cinema Effect mode that makes your video look like a movie."+ Keys.ENTER
-                        +"Super fast chip. And a tireless battery.");
+                        + "Cinema Effect mode that makes your video look like a movie." + Keys.ENTER
+                        + "Super fast chip. And a tireless battery.");
         setField(NewProTab, "head_title[en]", "Telefon");
         setField(NewProTab, "meta_description[en]", "Telefon|Iphone 13|Buy");
 
@@ -105,9 +105,11 @@ public class AddingProducts {
         //Product addition control
         Assert.assertTrue("No new product found", numberOfProducts + 1 == driver.findElements(By.cssSelector(".row")).size());
     }
+
     private void setField(WebElement createAccount, String field, String data) {
         createAccount.findElement(By.cssSelector("input[name='" + field + "']")).sendKeys(data);
     }
+
     @After
     public void stop() {
         System.out.println("Test is ended");

@@ -2,6 +2,7 @@ package ru.org.autotest;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -17,7 +18,10 @@ public class WorkWithTheBag {
         System.out.println("Test is started");
 
     }
+    @Test
+    public void Task12Test() throws InterruptedException {
 
+    }
     @After
     public void stop() {
         System.out.println("Test is ended");
