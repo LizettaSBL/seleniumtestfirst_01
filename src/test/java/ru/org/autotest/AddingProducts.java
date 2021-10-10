@@ -67,7 +67,7 @@ public class AddingProducts {
         NewProTab.findElement(By.cssSelector("input[name=quantity]")).clear();
         setField(NewProTab, "quantity", Keys.END + "1");
         //Upload Images
-        File file = new File("C:\\Users\\User\\IdeaProjects\\seleniumtestfirst\\src\\main\\resources\\iphone_13.png");
+        File file = new File("./src/main/resources/iphone_13.png");
         setField(NewProTab, "new_images[]", file.getAbsolutePath());
         setField(NewProTab, "date_valid_from", "09.10.2021");
         setField(NewProTab, "date_valid_to", "09.12.2021");
