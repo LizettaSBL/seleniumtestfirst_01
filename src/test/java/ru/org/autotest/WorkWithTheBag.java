@@ -26,7 +26,7 @@ public class WorkWithTheBag {
     }
 
     @Test
-    public void Task12Test() {
+    public void Task13Test() {
         driver.get("http://localhost/litecart/en/");
         WebDriverWait wait = new WebDriverWait(driver, DEF_TIME);
         for (int i = 0; i < 3; i++) {
