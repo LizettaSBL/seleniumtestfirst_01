@@ -5,11 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
-
-import javax.swing.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /*      1) регистрация новой учётной записи с уникальным адресом
         2) выход(logout)
@@ -30,8 +30,11 @@ public class UserRegistration {
 
     @Before
     public void start() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
+ /*       System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);*/
+        System.setProperty("webdriver.gecko.driver", "C:\\Tools\\geckodriver.exe");
+        driver = new FirefoxDriver(); //вызов браузера
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         System.out.println("Test is started");
 
@@ -42,9 +45,6 @@ public class UserRegistration {
         driver.get("http://localhost/litecart/en/");
         driver.findElement(By.cssSelector("#box-account-login tr:nth-child(5) a")).click();
         WebElement createAccount = driver.findElement(By.cssSelector("#create-account"));
-//Entering a value captcha- if captcha = true
-/*        String captchaVal = JOptionPane.showInputDialog("Please enter the captcha value:");
-        driver.findElement(By.xpath("//*[@id=\"create-account\"]/div//input[2]")).sendKeys(captchaVal);*/
 //Entering values
         setField(createAccount, "firstname", firstName);
         setField(createAccount, "lastname", lastName);
@@ -52,9 +52,8 @@ public class UserRegistration {
         setField(createAccount, "postcode", postcode);
         setField(createAccount, "city", city);
 //Country entry
-        WebElement selectCountry = createAccount.findElement(By.tagName("select"));
-        Select select = new Select(selectCountry);
-        select.selectByVisibleText(country);
+        driver.findElement(By.cssSelector("span.select2-selection__arrow")).click();
+        driver.findElement(By.xpath("//li[text()='"+country+"']")).click();
 //generating mail
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
