@@ -47,6 +47,9 @@ public class WorkWithTheBag {
         By locator = By.xpath("//*[@id=\"order_confirmation-wrapper\"]/table//tr[2]");
         for (int i = 0; i < numberOfLines; i++) {
             WebElement table = driver.findElement(locator);
+            if (i != numberOfLines-1) {
+                driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/ul/li[1]")).click();
+            }
             wait.until(visibilityOf(driver.findElement(By.cssSelector("button[name=remove_cart_item]")))).click();
             wait.until(stalenessOf(table));
             if (i == numberOfLines - 1) {
