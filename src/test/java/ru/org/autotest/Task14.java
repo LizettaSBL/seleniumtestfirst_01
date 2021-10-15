@@ -46,9 +46,11 @@ public class Task14 {
             newTab.remove(oldTab);
             // change focus to new tab
             driver.switchTo().window(newTab.get(0));
+            wait.until(presenceOfElementLocated(By.tagName("body")));
             driver.close();
             // change focus back to old tab
             driver.switchTo().window(oldTab);
+            wait.until(titleIs("Add New Country | My Store"));
         }
     }
    @After
