@@ -23,6 +23,7 @@ public class Task14 {
         System.out.println("Test is started");*/
         System.setProperty("webdriver.gecko.driver", "C:\\Tools\\geckodriver.exe");
         driver = new FirefoxDriver(); //вызов браузера
+        System.out.println("Test is started");
 
     }
 
@@ -42,11 +43,11 @@ public class Task14 {
         String oldTab = driver.getWindowHandle(); //список открытых окон- главная страница с формой
         for (int i = 0; i < driver.findElements(By.xpath(Locator)).size(); i++) {
             driver.findElements(By.xpath(Locator)).get(i).click();
+            wait.until(presenceOfElementLocated(By.tagName("body")));
             ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
             newTab.remove(oldTab);
             // change focus to new tab
             driver.switchTo().window(newTab.get(0));
-            wait.until(presenceOfElementLocated(By.tagName("body")));
             driver.close();
             // change focus back to old tab
             driver.switchTo().window(oldTab);
